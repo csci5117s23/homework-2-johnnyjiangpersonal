@@ -13,7 +13,6 @@ export default function Submit(){
         const update = async () => {
             const token = await getToken({ template: "codehooks" });
             const res = getTodolist(token);
-            console.log(res);
             setTodoList(res);
         }
         update()
@@ -23,11 +22,17 @@ export default function Submit(){
     return (
         
         <>
-            <form>
+
                 <label htmlFor="todo">Add to do item</label>
                 <input type="text" onChange={(e) => setTask(e.target.value)} value={task} />
-                <input onClick={() => {setTask("")}} type="submit" />
-            </form>
+                <input onClick={async () =>{
+                    
+                    const token = await getToken({ template: "codehooks" });
+
+                    addTodos(token, userId, task);
+                
+                }} type="submit" />
+
             
             <p>end</p>
         </>
