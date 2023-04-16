@@ -4,20 +4,9 @@ import { useAuth } from "@clerk/nextjs";
 import { getTodolist, addTodos } from "./editTodos";
 import TodoElement from "./TodoElement";
 
-export default function Submit({todoList, setTodoList}){
+export default function Submit({setTodoList, done}){
     let [task, setTask] = useState("");
     const { isLoaded, userId, sessionId, getToken } = useAuth();
-
-  
-    useEffect(() =>{
-        const update = async () => {
-            const token = await getToken({ template: "codehooks" });
-            const res = await getTodolist(token,"false");
-            console.log(res);
-            setTodoList(res);
-        }
-        update()
-    }, [])
 
     return (
         
@@ -27,7 +16,7 @@ export default function Submit({todoList, setTodoList}){
                     const token = await getToken({ template: "codehooks" });
 
                     await addTodos(token, userId, task);
-                    const res = await getTodolist(token,"false");
+                    const res = await getTodolist(token,done);
                     setTodoList(res);
                     setTask("");
                 }
@@ -37,14 +26,6 @@ export default function Submit({todoList, setTodoList}){
                 <input type="submit" />
             </form>
             
-            <hr />
-            {todoList.map((todo) => { return(
-                
-                
-                    <TodoElement key={todo._id} todo={todo} setTodoList={setTodoList} />
-
-            );
-            })}
         </>
     );
 }
