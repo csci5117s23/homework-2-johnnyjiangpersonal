@@ -2,26 +2,23 @@ import { useState,useEffect } from "react";
 import { useAuth } from "@clerk/nextjs";
 
 import { getTodolist, addTodos } from "./editTodos";
-import Link from 'next/link'
-import { useRouter } from "next/router";
+import TodoElement from "./TodoElement";
 
-export default function Submit(){
+export default function Submit({todoList, setTodoList}){
     let [task, setTask] = useState("");
-    let [todoList, setTodoList] = useState([]);
     const { isLoaded, userId, sessionId, getToken } = useAuth();
 
   
     useEffect(() =>{
         const update = async () => {
             const token = await getToken({ template: "codehooks" });
-            const res = await getTodolist(token);
+            const res = await getTodolist(token,"false");
             console.log(res);
             setTodoList(res);
         }
         update()
     }, [])
 
-    const router = useRouter();
     return (
         
         <>
@@ -30,7 +27,8 @@ export default function Submit(){
                     const token = await getToken({ template: "codehooks" });
 
                     await addTodos(token, userId, task);
-                    setTodoList(await getTodolist(token));
+                    const res = await getTodolist(token,"false");
+                    setTodoList(res);
                     setTask("");
                 }
                 }>
@@ -42,15 +40,9 @@ export default function Submit(){
             <hr />
             {todoList.map((todo) => { return(
                 
-                <>
                 
-                    <input type="checkbox" />
-                    <Link href={`../todos/${todo._id}`} >
-                        {todo.todo}
-                    </Link>
-                    <br />
-                    <hr />
-                </>
+                    <TodoElement key={todo._id} todo={todo} setTodoList={setTodoList} />
+
             );
             })}
         </>

@@ -23,8 +23,8 @@ export async function addTodos(token, userid, todo) {
 
 
 
-export async function getTodolist(token) {
-    const backend = "https://backend-lebq.api.codehooks.io/dev/todolist";
+export async function getTodolist(token, state) {
+    const backend = "https://backend-lebq.api.codehooks.io/dev/todolist?isDone=" + state;
     const access = "af51eaa1-449e-4100-829b-6093eaa3387f";
 
     const response = await fetch(backend,{
@@ -32,6 +32,30 @@ export async function getTodolist(token) {
         'headers': {'Authorization': 'Bearer ' + token,
         'x-apikey': access,
         'Content-Type': 'application/json'},
+    }).catch(e => {
+        console.log("ERROS")
+        console.log(e)
+    });
+    const data = await response.json().catch(e => {
+        console.log("ERROS")
+        console.log(e)
+    });
+    return data.reverse();
+}
+
+
+
+
+export async function markTodolist(token, state, id) {
+    const backend = "https://backend-lebq.api.codehooks.io/dev/todolist/" + id;
+    const access = "af51eaa1-449e-4100-829b-6093eaa3387f";
+
+    const response = await fetch(backend,{
+        'method': 'PATCH',
+        'headers': {'Authorization': 'Bearer ' + token,
+        'x-apikey': access,
+        'Content-Type': 'application/json'},
+        'body': JSON.stringify({isDone: state}),
     }).catch(e => {
         console.log("ERROS")
         console.log(e)
