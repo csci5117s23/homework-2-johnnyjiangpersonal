@@ -23,8 +23,9 @@ export async function addTodos(token, userid, todo) {
 
 
 
-export async function getTodolist(token, state) {
-    const backend = "https://backend-lebq.api.codehooks.io/dev/todolist?isDone=" + state;
+export async function getTodolist(token, userid, state) {
+    console.log(userid)
+    const backend = "https://backend-lebq.api.codehooks.io/dev/todolist?" + "userid="+ userid + "&isDone=" + state;
     const access = "af51eaa1-449e-4100-829b-6093eaa3387f";
 
     const response = await fetch(backend,{

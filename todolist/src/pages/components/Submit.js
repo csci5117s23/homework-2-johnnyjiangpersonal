@@ -16,7 +16,7 @@ export default function Submit({setTodoList, done}){
                     const token = await getToken({ template: "codehooks" });
 
                     await addTodos(token, userId, task);
-                    const res = await getTodolist(token,done);
+                    const res = await getTodolist(token, userId,done);
                     setTodoList(res);
                     setTask("");
                 }

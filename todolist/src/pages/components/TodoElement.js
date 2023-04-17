@@ -5,17 +5,23 @@ import { useAuth } from "@clerk/nextjs";
 export default function TodoElement({todo, setTodoList, done} ){
 
     const { isLoaded, userId, sessionId, getToken } = useAuth();
+    let task = "";
+    if(todo.todo.length > 50){
+        task = todo.todo.substring(0,50) + "...";
+    }else{
+        task = todo.todo;
+    }
     return (
         <>
             <input type="checkbox" onChange={async () => {
-                console.log("change");
                 const token = await getToken({ template: "codehooks" });
-                await markTodolist(token, !todo.isDone, todo._id)
-                setTodoList(await getTodolist(token, done))}} 
+                await markTodolist(token, !todo.isDone, todo._id);
+                setTodoList(await getTodolist(token, userId, done));
+            }} 
                 defaultChecked={todo.isDone}
                 />
             <Link href={`../todos/${todo._id}`} >
-                {todo.todo}
+                {task}
             </Link>
             <br />
             <hr />
