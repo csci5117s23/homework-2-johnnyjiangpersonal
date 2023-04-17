@@ -4,7 +4,7 @@ import { Inter } from 'next/font/google'
 import { SignUp, SignedIn, SignOut, useAuth } from "@clerk/nextjs";
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import Layout from './components/Layout';
+import Layout from '../components/Layout';
 
 export default function Home() {
   const { isSignedIn } = useAuth();

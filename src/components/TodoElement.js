@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { getTodolist, markTodolist } from "./editTodos"
+import { getTodolist, markTodolist } from "../modules/editTodos"
 import { useAuth } from "@clerk/nextjs";
 
 export default function TodoElement({todo, setTodoList, done} ){

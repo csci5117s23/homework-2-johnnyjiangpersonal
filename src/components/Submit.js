@@ -1,8 +1,7 @@
 import { useState,useEffect } from "react";
 import { useAuth } from "@clerk/nextjs";
 
-import { getTodolist, addTodos } from "./editTodos";
-import TodoElement from "./TodoElement";
+import { getTodolist, addTodos } from "../modules/editTodos";
 
 export default function Submit({setTodoList, done}){
     let [task, setTask] = useState("");

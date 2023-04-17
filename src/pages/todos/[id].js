@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { useAuth } from '@clerk/nextjs';
 import { useState, useEffect } from 'react';
-import { getTodoitem, updateTodo, markTodolist } from '../components/editTodos';
+import { getTodoitem, updateTodo, markTodolist } from '../../modules/editTodos';
 
 export default function ChangeTodos() {
   

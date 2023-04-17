@@ -1,9 +1,9 @@
 
-import Layout from './components/Layout'
-import TodoList from './components/ListTodos'
+import Layout from '../components/Layout'
+import TodoList from '../components/ListTodos'
 import { useState,useEffect } from 'react'
 import { useAuth } from '@clerk/nextjs';
-import { getTodolist } from './components/editTodos';
+import { getTodolist } from '../modules/editTodos';
 import { useRouter } from 'next/router';
 
 export default function Done() {
