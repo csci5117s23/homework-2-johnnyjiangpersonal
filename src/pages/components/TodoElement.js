@@ -5,7 +5,7 @@ import { useAuth } from "@clerk/nextjs";
 export default function TodoElement({todo, setTodoList, done} ){
 
     const { isLoaded, userId, sessionId, getToken } = useAuth();
-    let task = "";
+    let task = "Loading...";
     if(todo.todo.length > 50){
         task = todo.todo.substring(0,50) + "...";
     }else{
