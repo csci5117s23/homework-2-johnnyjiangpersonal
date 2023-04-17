@@ -10,6 +10,8 @@ export default function Todo() {
   
   const { isLoaded, userId, sessionId, getToken } = useAuth();
   const router = useRouter();
+  const { isSignedIn } = useAuth();
+  const {push} = useRouter();
 
   let [todoList, setTodoList] = useState([]);
   
@@ -17,6 +19,10 @@ export default function Todo() {
   const done = "false"
 
   useEffect(() =>{
+    if(!isSignedIn){
+      push("../");
+    }
+
     const update = async () => {
       if(userId != null){
         console.log(userId);

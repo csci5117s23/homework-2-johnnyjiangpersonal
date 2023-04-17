@@ -10,12 +10,18 @@ export default function ChangeTodos() {
   const [change, setChange] = useState("Loading");
   const router = useRouter();
   const { isLoaded, userId, sessionId, getToken } = useAuth();
+  const { isSignedIn } = useAuth();
+  const {push} = useRouter();
 
 
   const { id } = router.query
   
   
   useEffect(() =>{
+    
+    if(!isSignedIn){
+      push('../');
+    }
     const update = async () => {
       if(userId != null){
         console.log(userId);

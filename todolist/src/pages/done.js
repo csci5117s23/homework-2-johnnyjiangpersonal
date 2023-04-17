@@ -11,11 +11,18 @@ export default function Done() {
 
   const { isLoaded, userId, sessionId, getToken } = useAuth();
   const router = useRouter();
+  
+  const { isSignedIn } = useAuth();
+  const {push} = useRouter();
 
   const done = "true"
 
   
   useEffect(() =>{
+    if(!isSignedIn){
+      push('/todos');
+    }
+
     const update = async () => {
       if(userId != null){
         console.log(userId);
