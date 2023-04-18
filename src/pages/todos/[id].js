@@ -20,7 +20,7 @@ export default function ChangeTodos() {
   useEffect(() =>{
     
     if(!isSignedIn){
-      push('../');
+      push('../404');
     }
     const update = async () => {
       if(userId != null){
