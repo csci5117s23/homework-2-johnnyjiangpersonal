@@ -1,7 +1,7 @@
 export async function addTodos(token, userid, todo) {
-    const backend = "https://backend-lebq.api.codehooks.io/dev/todolist";
-    const access = "af51eaa1-449e-4100-829b-6093eaa3387f";
-
+    const backend = process.env.NEXT_PUBLIC_CODEHOOKS_URL;
+    const access = process.env.NEXT_PUBLIC_API_KEY;
+    console.log(backend);
     const response = await fetch(backend,{
         'method': 'POST',
         'headers': {'Authorization': 'Bearer ' + token,
@@ -25,8 +25,8 @@ export async function addTodos(token, userid, todo) {
 
 export async function getTodolist(token, userid, state) {
     console.log(userid)
-    const backend = "https://backend-lebq.api.codehooks.io/dev/todolist?" + "userid="+ userid + "&isDone=" + state;
-    const access = "af51eaa1-449e-4100-829b-6093eaa3387f";
+    const backend = process.env.NEXT_PUBLIC_CODEHOOKS_URL+ "?userid="+ userid + "&isDone=" + state;
+    const access = process.env.NEXT_PUBLIC_API_KEY;
 
     const response = await fetch(backend,{
         'method': 'GET',
@@ -48,8 +48,8 @@ export async function getTodolist(token, userid, state) {
 
 
 export async function markTodolist(token, state, id) {
-    const backend = "https://backend-lebq.api.codehooks.io/dev/todolist/" + id;
-    const access = "af51eaa1-449e-4100-829b-6093eaa3387f";
+    const backend = process.env.NEXT_PUBLIC_CODEHOOKS_URL + "/" + id;
+    const access = process.env.NEXT_PUBLIC_API_KEY;
 
     const response = await fetch(backend,{
         'method': 'PATCH',
@@ -70,8 +70,8 @@ export async function markTodolist(token, state, id) {
 
 export async function getTodoitem(token, userid, id) {
     console.log(userid)
-    const backend = "https://backend-lebq.api.codehooks.io/dev/todolist?" + "userid="+ userid + "&_id=" + id;
-    const access = "af51eaa1-449e-4100-829b-6093eaa3387f";
+    const backend = process.env.NEXT_PUBLIC_CODEHOOKS_URL + "?userid=" + userid + "&_id=" + id;
+    const access = process.env.NEXT_PUBLIC_API_KEY;
 
     const response = await fetch(backend,{
         'method': 'GET',
@@ -91,8 +91,8 @@ export async function getTodoitem(token, userid, id) {
 
 
 export async function updateTodo(token, userid, id, todo) {
-    const backend = "https://backend-lebq.api.codehooks.io/dev/todolist/" + id + "?userid="+ userid;
-    const access = "af51eaa1-449e-4100-829b-6093eaa3387f";
+    const backend = process.env.NEXT_PUBLIC_CODEHOOKS_URL + "/" + id + "?userid="+ userid;
+    const access = process.env.NEXT_PUBLIC_API_KEY;
 
     const response = await fetch(backend,{
         'method': 'PATCH',
