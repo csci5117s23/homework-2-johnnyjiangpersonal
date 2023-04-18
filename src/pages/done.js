@@ -43,7 +43,7 @@ export default function Done() {
       <main>
         <Layout />
         <button onClick={() => router.push('./todos')}>Tasks to do</button>
-        <TodoList todoList={todoList} setTodoList={setTodoList} done={done} />
+        <TodoList todoList={todoList} setTodoList={setTodoList} done={done}/>
       </main>
     </>
   )

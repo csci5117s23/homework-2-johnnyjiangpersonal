@@ -5,7 +5,7 @@ import { getTodoitem, updateTodo, markTodolist } from '../../modules/editTodos';
 
 export default function ChangeTodos() {
   
-  const [task, setTask] = useState("");
+  const [task, setTask] = useState({});
   const [done, setDone] = useState("Loading");
   const [change, setChange] = useState("Loading");
   const router = useRouter();
@@ -18,10 +18,7 @@ export default function ChangeTodos() {
   
   
   useEffect(() =>{
-    
-    if(!isSignedIn){
-      push('../404');
-    }
+   
     const update = async () => {
       if(userId != null){
         console.log(userId);
@@ -30,22 +27,30 @@ export default function ChangeTodos() {
         
         setTask(res[0]);
         setChange("Make Change");
-
-        if(task.isDone){
+        
+        
+        if(res[0].isDone){
           setDone("Mark Undone");
           console.log(done);
         }else{
           setDone("Mark done");
           console.log(done);
         }
+        console.log(done);
       }
        
     }
     update().catch(console.error);
+     
+    if(!isSignedIn){
+      push('../404');
+    }
   }, [userId])
     
   return (
     <>
+    
+      {console.log(done)}
       <textarea rows="5" cols="50" onChange={(e) => setTask(e.target.value)} defaultValue={task.todo} />
       <button onClick={ async () => {
         
@@ -55,8 +60,9 @@ export default function ChangeTodos() {
         setChange("Make Change");
       }}>{change}</button>
       <button onClick={ async () => {
+        {console.log(done)}
         const token = await getToken({ template: "codehooks" });
-        await markTodolist(token, (done == "Mark Undone"), task._id);
+        await markTodolist(token, (done == "Mark done"), task._id);
         if(done == "Mark Undone"){
           setDone("Mark Done");
         }else{

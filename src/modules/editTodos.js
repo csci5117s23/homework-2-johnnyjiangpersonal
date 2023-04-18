@@ -65,11 +65,11 @@ export async function markTodolist(token, state, id) {
         console.log("ERROS")
         console.log(e)
     });
+    console.log(data);
     return data;
 }
 
 export async function getTodoitem(token, userid, id) {
-    console.log(userid)
     const backend = process.env.NEXT_PUBLIC_CODEHOOKS_URL + "?userid=" + userid + "&_id=" + id;
     const access = process.env.NEXT_PUBLIC_API_KEY;
 
@@ -86,6 +86,7 @@ export async function getTodoitem(token, userid, id) {
         console.log("ERROS")
         console.log(e)
     });
+    console.log(data);
     return data;
 }
 
