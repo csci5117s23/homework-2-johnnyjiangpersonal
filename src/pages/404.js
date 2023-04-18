@@ -1,6 +1,8 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
+import { useRouter } from "next/router";
 
 export default function Custom404() {
+    const router = useRouter();
     return <>
     <SignedIn>
         <h1>This page doesn't exist</h1>
